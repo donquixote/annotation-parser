@@ -1,0 +1,24 @@
+{
+  "name": "donquixote/annotation",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Hennings",
+      "email": "andreas@dqxtech.net"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Donquixote\\Annotation\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Donquixote\\Annotation\\Tests\\": "tests/src"
+    }
+  },
+  "require": {
+    "php": ">=5.5.0"
+  }
+}
