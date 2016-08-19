@@ -17,7 +17,6 @@ $docText = '
   @return bool
 ';
 $parser = new AnnotationParser($docText);
-$position = 0;
 if (false !== $position = strpos('@Foo', $docText)) {
   $annotation = $parser->doctrineAnnotation($position);
 }
