@@ -3,7 +3,7 @@
 namespace Donquixote\Annotation\Parser;
 
 use Donquixote\Annotation\DocCommentUtil;
-use Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotation;
+use Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotation;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassAliasConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_Fqcn;
@@ -61,7 +61,7 @@ class AnnotationParser {
 
     $i = $j;
 
-    return new DoctrineAnnotation($name, $arguments);
+    return new RawDoctrineAnnotation($name, $arguments);
   }
 
   /**
@@ -193,7 +193,7 @@ class AnnotationParser {
     $c = $this->text[$i];
 
     if ('"' === $c) {
-      return $this->string($i);
+      return $this->regex($i, '~\G"([^\n\r\f"\\\\]+|\\\\[bnrf"\\\\])*"~');
     }
 
     if ('{' === $c) {
@@ -204,27 +204,7 @@ class AnnotationParser {
       return $this->doctrineAnnotation($i);
     }
 
-    if ('\\' === $c) {
-      return $this->constantStartingWithNsSeparator($i);
-    }
-
-    if ('-' === $c) {
-      return $this->numberStartingWithMinus($i);
-    }
-
-    if ('.' === $c) {
-      return $this->numberStartingWithDot($i);
-    }
-
-    if ('0' === $c) {
-      return $this->numberStartingWithZero($i);
-    }
-
-    if (ctype_digit($c)) {
-      return $this->numberStartingWithNonZeroDigit($i);
-    }
-
-    return $this->constantStartingWithoutNsSeparator($i);
+    return $this->regex($i, '~\G[^"{}@\(\),]*[^"{}@\(\),\s]~');
   }
 
   //                                                                 Identifiers
@@ -305,7 +285,7 @@ class AnnotationParser {
    */
   public function string(&$i) {
 
-    if (1 !== $r = preg_match('~\G"([^\n\r\f"\\\\]+|\\\\[bnrf"\\\\])*"~', $this->text, $m, 0, $i)) {
+    if (1 !== preg_match('~\G"([^\n\r\f"\\\\]+|\\\\[bnrf"\\\\])*"~', $this->text, $m, 0, $i)) {
       return false;
     }
 

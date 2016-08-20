@@ -3,7 +3,7 @@
 namespace Donquixote\Annotation\Tests;
 
 use Donquixote\Annotation\Parser\AnnotationParser;
-use Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotation;
+use Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotation;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_QcnOrAlias;
 
@@ -16,14 +16,14 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
 
     foreach ([
 
-      '@Foo(x = "7", y = {})' => new DoctrineAnnotation('Foo', [
-        'x' => '7',
+      '@Foo(x = "7", y = {})' => new RawDoctrineAnnotation('Foo', [
+        'x' => '"7"',
         'y' => [],
       ]),
 
-      '@Foo(x = "7", y = @Bar())' => new DoctrineAnnotation('Foo', [
-        'x' => '7',
-        'y' => new DoctrineAnnotation('Bar', []),
+      '@Foo(x = "7", y = @Bar())' => new RawDoctrineAnnotation('Foo', [
+        'x' => '"7"',
+        'y' => new RawDoctrineAnnotation('Bar', []),
       ]),
 
       '@Foo(
@@ -32,9 +32,9 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
 "7"
   ,
   y = @Bar()
-)' => new DoctrineAnnotation('Foo', [
-        'x' => '7',
-        'y' => new DoctrineAnnotation('Bar', []),
+)' => new RawDoctrineAnnotation('Foo', [
+        'x' => '"7"',
+        'y' => new RawDoctrineAnnotation('Bar', []),
       ]),
 
     ] as $text => $expected) {
@@ -58,7 +58,7 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
 
     $i = 0;
     self::assertSame(
-      ['x' => '7', 'y' => []],
+      ['x' => '"7"', 'y' => []],
       p('(x = "7", y = {})')->body($i));
     self::assertSame(17, $i);
 
@@ -73,7 +73,7 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
 
     $i = 0;
     self::assertSameExport(
-      ['x' => '7', 'y' => new Identifier_QcnOrAlias('TRUE')],
+      ['x' => '"7"', 'y' => 'TRUE'],
       p('{x = "7", y = TRUE},')->curlyArray($i));
     self::assertSame(19, $i);
   }
@@ -82,13 +82,13 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
 
     $i = 0;
     self::assertSameExport(
-      ['x' => '7', 'y' => new Identifier_QcnOrAlias('TRUE')],
+      ['x' => '"7"', 'y' => 'TRUE'],
       p('x = "7", y = TRUE')->argumentsNonEmpty($i));
     self::assertSame(17, $i);
 
     $i = 0;
     self::assertSameExport(
-      ['x' => '7', 'y' => new Identifier_QcnOrAlias('TRUE')],
+      ['x' => '"7"', 'y' => 'TRUE'],
       p('x = "7", y = TRUE}')->argumentsNonEmpty($i));
     self::assertSame(17, $i);
   }
@@ -99,11 +99,11 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
   public function testValue() {
 
     $i = 0;
-    self::assertSameExport(new Identifier_QcnOrAlias('TRUE'), p('TRUE')->value($i));
+    self::assertSameExport('TRUE', p('TRUE')->value($i));
     self::assertSame(4, $i);
 
     $i = 0;
-    self::assertSame('abc', p('"abc"')->value($i));
+    self::assertSame('"abc"', p('"abc"')->value($i));
     self::assertSame(5, $i);
   }
 
