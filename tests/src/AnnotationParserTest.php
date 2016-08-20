@@ -12,19 +12,43 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
   //                                                                   Structure
   // ---------------------------------------------------------------------------
 
-  public function testDoctrineAnnotation() {
+  /**
+   * @param string $text
+   * @param int $positionExpected
+   * @param mixed $resultExpected
+   *
+   * @dataProvider providerDoctrineAnnotation
+   */
+  public function testDoctrineAnnotation($text, $positionExpected, $resultExpected) {
 
     $i = 0;
-    self::assertSameExport(
-      new DoctrineAnnotation('Foo', ['x' => '7', 'y' => []]),
-      p($s = '@Foo(x = "7", y = {})')->doctrineAnnotation($i));
-    self::assertSame(21, $i);
+    self::assertSameExport($resultExpected, p($text)->doctrineAnnotation($i));
+    self::assertSame($positionExpected, $i);
+  }
 
-    $i = 0;
-    self::assertSameExport(
-      new DoctrineAnnotation('Foo', ['x' => '7', 'y' => new DoctrineAnnotation('Bar', [])]),
-      p($s = '@Foo(x = "7", y = @Bar())')->doctrineAnnotation($i));
-    self::assertSame(25, $i);
+  /**
+   * @return array[]
+   *   Format: $[$label] = [$text, $positionExpected, $resultExpected]
+   */
+  public function providerDoctrineAnnotation() {
+    return [
+      [
+        '@Foo(x = "7", y = {})',
+        21,
+        new DoctrineAnnotation('Foo', [
+          'x' => '7',
+          'y' => [],
+        ]),
+      ],
+      [
+        '@Foo(x = "7", y = @Bar())',
+        25,
+        new DoctrineAnnotation('Foo', [
+          'x' => '7',
+          'y' => new DoctrineAnnotation('Bar', []),
+        ]),
+      ],
+    ];
   }
 
   public function testBody() {
