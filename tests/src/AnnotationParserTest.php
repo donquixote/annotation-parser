@@ -12,43 +12,46 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
   //                                                                   Structure
   // ---------------------------------------------------------------------------
 
-  /**
-   * @param string $text
-   * @param int $positionExpected
-   * @param mixed $resultExpected
-   *
-   * @dataProvider providerDoctrineAnnotation
-   */
-  public function testDoctrineAnnotation($text, $positionExpected, $resultExpected) {
+  public function testDoctrineAnnotation() {
 
-    $i = 0;
-    self::assertSameExport($resultExpected, p($text)->doctrineAnnotation($i));
-    self::assertSame($positionExpected, $i);
-  }
+    foreach ([
 
-  /**
-   * @return array[]
-   *   Format: $[$label] = [$text, $positionExpected, $resultExpected]
-   */
-  public function providerDoctrineAnnotation() {
-    return [
-      [
-        '@Foo(x = "7", y = {})',
-        21,
-        new DoctrineAnnotation('Foo', [
-          'x' => '7',
-          'y' => [],
-        ]),
-      ],
-      [
-        '@Foo(x = "7", y = @Bar())',
-        25,
-        new DoctrineAnnotation('Foo', [
-          'x' => '7',
-          'y' => new DoctrineAnnotation('Bar', []),
-        ]),
-      ],
-    ];
+      '@Foo(x = "7", y = {})' => new DoctrineAnnotation('Foo', [
+        'x' => '7',
+        'y' => [],
+      ]),
+
+      '@Foo(x = "7", y = @Bar())' => new DoctrineAnnotation('Foo', [
+        'x' => '7',
+        'y' => new DoctrineAnnotation('Bar', []),
+      ]),
+
+      '@Foo(
+  x
+  =
+"7"
+  ,
+  y = @Bar()
+)' => new DoctrineAnnotation('Foo', [
+        'x' => '7',
+        'y' => new DoctrineAnnotation('Bar', []),
+      ]),
+
+    ] as $text => $expected) {
+      $i = 0;
+      self::assertSameExport($expected, p($text)->doctrineAnnotation($i), $text);
+      self::assertSame(strlen($text), $i, $text);
+    }
+
+    foreach ([
+      '@Foo',
+      '@Foo(',
+      '@Foo(@Bar(',
+    ] as $text) {
+      $i = 0;
+      self::assertFalse(p($text)->doctrineAnnotation($i), $text);
+      self::assertSame(0, $i, $text);
+    }
   }
 
   public function testBody() {
