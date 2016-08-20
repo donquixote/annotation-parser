@@ -2,6 +2,7 @@
 
 namespace Donquixote\Annotation\Parser;
 
+use Donquixote\Annotation\DocCommentUtil;
 use Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotation;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassAliasConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
@@ -21,6 +22,15 @@ class AnnotationParser {
    * @var int
    */
   private $strlen;
+
+  /**
+   * @param string $docComment
+   *
+   * @return self
+   */
+  public static function createFromDocComment($docComment) {
+    return new self(DocCommentUtil::docGetClean($docComment));
+  }
 
   /**
    * @param string $text
