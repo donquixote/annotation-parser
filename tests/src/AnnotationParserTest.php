@@ -223,11 +223,11 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
     $p = p("The horse (\t\n).");
 
     $i = 3;
-    self::assertTrue($p->ws1($i));
+    self::assertSame(' ', $p->ws1($i));
     self::assertSame(4, $i);
 
     $i = 11;
-    self::assertTrue($p->ws1($i));
+    self::assertSame("\t\n", $p->ws1($i));
     self::assertSame(13, $i);
 
     $i = 2;

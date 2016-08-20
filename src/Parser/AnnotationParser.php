@@ -503,6 +503,8 @@ class AnnotationParser {
    * Optional whitespace.
    *
    * @param int $i
+   *
+   * @return string
    */
   public function ws0(&$i) {
 
@@ -511,6 +513,8 @@ class AnnotationParser {
     }
 
     $i += strlen($m[0]);
+
+    return $m[0];
   }
 
   /**
@@ -518,7 +522,7 @@ class AnnotationParser {
    *
    * @param int $i
    *
-   * @return bool
+   * @return string|false
    */
   public function ws1(&$i) {
 
@@ -528,7 +532,7 @@ class AnnotationParser {
 
     $i += strlen($m[0]);
 
-    return true;
+    return $m[0];
   }
 
   //                                                                     Helpers
