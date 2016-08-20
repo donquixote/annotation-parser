@@ -229,7 +229,7 @@ class AnnotationParser {
   /**
    * @param int $i
    *
-   * @return string|false
+   * @return \Donquixote\Annotation\Value\Identifier\IdentifierInterface|false
    */
   public function constant(&$i) {
     if ('\\' === $this->text[$i]) {
@@ -243,8 +243,7 @@ class AnnotationParser {
   /**
    * @param int $i
    *
-   * @return string|false
-   *   E.g. '\\Zoo\\Fish::DEFAULT_NAME'.
+   * @return \Donquixote\Annotation\Value\Identifier\IdentifierInterface|false
    */
   private function constantStartingWithNsSeparator(&$i) {
 
@@ -265,8 +264,7 @@ class AnnotationParser {
   /**
    * @param int $i
    *
-   * @return string|false
-   *   E.g. 'NULL' or 'School::XYZ' or 'Zoo\\Fish::DEFAULT_NAME'.
+   * @return \Donquixote\Annotation\Value\Identifier\IdentifierInterface|false
    */
   private function constantStartingWithoutNsSeparator(&$i) {
 
