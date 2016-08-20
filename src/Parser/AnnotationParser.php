@@ -12,16 +12,11 @@ use Donquixote\Annotation\Value\Identifier\Identifier_QcnOrAlias;
 class AnnotationParser {
 
   /**
-   * String ending with ')'.
+   * String with '@' appended as terminator character.
    *
    * @var string
    */
   private $text;
-
-  /**
-   * @var int
-   */
-  private $strlen;
 
   /**
    * @param string $docComment
@@ -40,8 +35,7 @@ class AnnotationParser {
       $type = gettype($text);
       throw new \InvalidArgumentException("First argument expected to be string, $type found instead.");
     }
-    $this->text = $text . ')';
-    $this->strlen = count($text);
+    $this->text = $text . '@';
   }
 
   //                                                                   Structure
