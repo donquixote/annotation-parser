@@ -245,6 +245,13 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
     self::assertSame(3, $i);
   }
 
+  public function testUntilRegex() {
+
+    $i = 0;
+    self::assertSame('xYza', p('xYzafsd')->untilRegex($i, '~za(fs)~', 1));
+    self::assertSame(4, $i);
+  }
+
   //                                                          Test class helpers
   // ---------------------------------------------------------------------------
 

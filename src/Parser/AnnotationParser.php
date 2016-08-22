@@ -556,4 +556,20 @@ class AnnotationParser {
     return $m[$k];
   }
 
+  /**
+   * @param int $i
+   * @param string $pattern
+   * @param int $k
+   *
+   * @return bool|string
+   */
+  public function untilRegex(&$i, $pattern, $k = 0) {
+
+    if (!preg_match($pattern, $this->text, $m, PREG_OFFSET_CAPTURE, $i)) {
+      return false;
+    }
+
+    return substr($this->text, $i, $i = $m[$k][1]);
+  }
+
 }
