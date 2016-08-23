@@ -1,5 +1,5 @@
 <?php
-namespace Donquixote\Annotation\RawAnnotation;
+namespace Donquixote\Annotation\RawAst;
 
 interface RawDoctrineAnnotationInterface {
 

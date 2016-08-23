@@ -3,9 +3,9 @@
 namespace Donquixote\Annotation\Tests;
 
 use Donquixote\Annotation\Parser\AnnotationParser;
-use Donquixote\Annotation\RawAnnotation\BrokenDoctrineAnnotation;
-use Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotation;
-use Donquixote\Annotation\RawAnnotation\RawPhpDocAnnotation;
+use Donquixote\Annotation\RawAst\BrokenDoctrineAnnotation;
+use Donquixote\Annotation\RawAst\RawDoctrineAnnotation;
+use Donquixote\Annotation\RawAst\RawPhpDocAnnotation;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_QcnOrAlias;
 

@@ -2,8 +2,8 @@
 
 namespace Donquixote\Annotation\Tests;
 
-use Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotation;
-use Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotationInterface;
+use Donquixote\Annotation\RawAst\RawDoctrineAnnotation;
+use Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface;
 use Donquixote\Annotation\Resolver\AnnotationResolver_PrimitiveResolver;
 use Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotation;
 use Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotationInterface;
@@ -11,7 +11,7 @@ use Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotationInterface;
 class AnnotationResolverTest extends \PHPUnit_Framework_TestCase {
 
   /**
-   * @param \Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotationInterface $raw
+   * @param \Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface $raw
    * @param \Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotationInterface $expected
    *
    * @dataProvider providerResolveAnnotation

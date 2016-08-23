@@ -3,9 +3,9 @@
 namespace Donquixote\Annotation\Parser;
 
 use Donquixote\Annotation\DocCommentUtil;
-use Donquixote\Annotation\RawAnnotation\BrokenDoctrineAnnotation;
-use Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotation;
-use Donquixote\Annotation\RawAnnotation\RawPhpDocAnnotation;
+use Donquixote\Annotation\RawAst\BrokenDoctrineAnnotation;
+use Donquixote\Annotation\RawAst\RawDoctrineAnnotation;
+use Donquixote\Annotation\RawAst\RawPhpDocAnnotation;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassAliasConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_Fqcn;
@@ -150,7 +150,7 @@ class AnnotationParser {
   /**
    * @param int $i
    *
-   * @return \Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotation|false
+   * @return \Donquixote\Annotation\RawAst\RawDoctrineAnnotation|false
    */
   public function doctrineAnnotation(&$i) {
     $j = $i;

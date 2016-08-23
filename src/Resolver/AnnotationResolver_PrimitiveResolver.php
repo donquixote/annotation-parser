@@ -2,7 +2,7 @@
 
 namespace Donquixote\Annotation\Resolver;
 
-use Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotationInterface;
+use Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface;
 use Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotation;
 
 class AnnotationResolver_PrimitiveResolver implements AnnotationResolverInterface {
@@ -29,7 +29,7 @@ class AnnotationResolver_PrimitiveResolver implements AnnotationResolverInterfac
   }
 
   /**
-   * @param \Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotationInterface $rawAnnotation
+   * @param \Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface $rawAnnotation
    *
    * @return \Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotationInterface
    *

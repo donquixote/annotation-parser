@@ -2,12 +2,12 @@
 
 namespace Donquixote\Annotation\Resolver;
 
-use Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotationInterface;
+use Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface;
 
 interface AnnotationResolverInterface {
 
   /**
-   * @param \Donquixote\Annotation\RawAnnotation\RawDoctrineAnnotationInterface $rawAnnotation
+   * @param \Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface $rawAnnotation
    *
    * @return \Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotationInterface
    */
