@@ -14,50 +14,6 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
   //                                                                   Structure
   // ---------------------------------------------------------------------------
 
-  public function testDocElements() {
-
-    foreach ([
-      '' => [],
-      'Gets the beer.
-
-@foo()
-
-@m()@x()
-@bar(
-  x = 6
-)
-@z()
-
-@param int $n
-  How many beers.
-@param float|null $amount
-
-@return bool
-' => [
-        "Gets the beer.\n",
-        new RawDoctrineAnnotation('foo', []),
-        "\n",
-        new RawDoctrineAnnotation('m', []),
-        "@x()",
-        new RawDoctrineAnnotation('bar', ['x' => '6']),
-        new RawDoctrineAnnotation('z', []),
-        "\n",
-        new RawPhpDocAnnotation('param', " int \$n\n  How many beers."),
-        new RawPhpDocAnnotation('param', " float|null \$amount\n"),
-        new RawPhpDocAnnotation('return', " bool\n"),
-      ],
-      '
-@missingSpace#
-@missingClosingBracket(
-@missingOpeningBracket)' => [
-        "\n@missingSpace#",
-        new BrokenDoctrineAnnotation('missingClosingBracket', "(\n@missingOpeningBracket)"),
-      ],
-    ] as $text => $expected) {
-      self::assertSameExport($expected, p($text)->docElements(0), $text);
-    }
-  }
-
   public function testDoctrineAnnotation() {
 
     foreach ([
