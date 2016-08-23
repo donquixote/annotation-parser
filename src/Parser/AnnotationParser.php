@@ -690,4 +690,14 @@ class AnnotationParser {
     return substr($this->text, $i, $i = $m[$k][1]);
   }
 
+  /**
+   * @param int $i0
+   * @param int $i1
+   *
+   * @return string
+   */
+  public function substr($i0, $i1) {
+    return substr($this->text, $i0, $i1 - $i0);
+  }
+
 }
