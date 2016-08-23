@@ -307,10 +307,26 @@ class AnnotationParser {
     }
 
     if ('@' === $c) {
-      return $this->doctrineAnnotation($i);
+      if (false !== $v = $this->doctrineAnnotation($i)) {
+        return $v;
+      }
     }
 
-    return $this->regex($i, '~\G[^"{}@\(\),]*[^"{}@\(\),\s]~');
+    $j = $i + 1;
+    while ($this->regexMatch($j, '~\s*(["{}@\)\(,])~', $m, PREG_OFFSET_CAPTURE)) {
+      if ('(' !== $m[1][0]) {
+        $substr = $this->substr($i, $m[0][1]);
+        $i = $m[0][1];
+        return $substr;
+      }
+      // Allow '()', but no other bracket statement.
+      if (')' !== $this->text[$m[1][1] + 1]) {
+        return false;
+      }
+      $j = $m[0][1] + 2;
+    }
+
+    return false;
   }
 
   //                                                                 Identifiers
