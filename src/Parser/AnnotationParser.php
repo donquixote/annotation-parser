@@ -670,7 +670,7 @@ class AnnotationParser {
    *
    * @return int
    */
-  public function regexMatch(&$i, $pattern, array &$m = null, $flags = 0) {
+  public function regexMatch($i, $pattern, array &$m = null, $flags = 0) {
     return preg_match($pattern, $this->text, $m, $flags, $i);
   }
 
