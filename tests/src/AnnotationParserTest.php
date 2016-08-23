@@ -307,7 +307,6 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
    * @param string $message
    */
   private static function assertSameExport($expected, $actual, $message = '') {
-    self::assertEquals($expected, $actual, $message);
     self::assertSame(var_export($expected, true), var_export($actual, true), $message);
   }
 
