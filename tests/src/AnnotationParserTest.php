@@ -321,3 +321,23 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
 function p($text) {
   return new AnnotationParser($text);
 }
+
+/**
+ * @param string $name
+ * @param array $arguments
+ *
+ * @return \Donquixote\Annotation\RawAst\RawDoctrineAnnotation
+ */
+function rda($name, array $arguments) {
+  return new RawDoctrineAnnotation($name, $arguments);
+}
+
+/**
+ * @param string $name
+ * @param string $text
+ *
+ * @return \Donquixote\Annotation\RawAst\RawPhpDocAnnotation
+ */
+function rdt($name, $text) {
+  return new RawPhpDocAnnotation($name, $text);
+}
