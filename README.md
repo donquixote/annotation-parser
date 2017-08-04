@@ -27,7 +27,8 @@ if (false !== $position = strpos('@Foo', $docText)) {
 There are two main differences:
 - Annotations are parsed into an abstract syntax tree (AST), before resolving identifiers and constants.
 - Unlike in Doctrine, there is no such a concept like "annotation classes". An annotation name is just a string, it is not interpreted a class alias.
-- This being said, I imagine it not too hard to implement Doctrine's "annotation class" concept on top of this library.
+
+This being said, I imagine it not too hard to implement Doctrine's "annotation class" concept on top of this library.
 
 ## Use case
 
