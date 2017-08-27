@@ -10,7 +10,6 @@ use Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface;
 use Donquixote\Annotation\RawAst\RawPhpDocAnnotation;
 use Donquixote\Annotation\Resolver\AnnotationResolver_PrimitiveResolver;
 use Donquixote\Annotation\Resolver\AnnotationResolverInterface;
-use Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotationInterface;
 
 class DocCommentUtil {
 

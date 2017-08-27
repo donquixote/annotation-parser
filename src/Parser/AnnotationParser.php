@@ -3,9 +3,7 @@
 namespace Donquixote\Annotation\Parser;
 
 use Donquixote\Annotation\DocCommentUtil;
-use Donquixote\Annotation\RawAst\BrokenDoctrineAnnotation;
 use Donquixote\Annotation\RawAst\RawDoctrineAnnotation;
-use Donquixote\Annotation\RawAst\RawPhpDocAnnotation;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassAliasConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_Fqcn;

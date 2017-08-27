@@ -3,7 +3,6 @@
 namespace Donquixote\Annotation\Tests;
 
 use Donquixote\Annotation\Parser\AnnotationParser;
-use Donquixote\Annotation\RawAst\BrokenDoctrineAnnotation;
 use Donquixote\Annotation\RawAst\RawDoctrineAnnotation;
 use Donquixote\Annotation\RawAst\RawPhpDocAnnotation;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
