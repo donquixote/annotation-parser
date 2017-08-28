@@ -70,7 +70,7 @@ class AnnotationReaderTest extends \PHPUnit_Framework_TestCase {
    */
   private function getReader() {
 
-    $primitiveResolver = new PrimitiveResolver_Default();
+    $primitiveResolver = PrimitiveResolver_Default::create();
 
     $contextFinder = new ContextFinder_PhpTokenParser();
     $contextFinder = new ContextFinder_CustomReflectorDecorator(

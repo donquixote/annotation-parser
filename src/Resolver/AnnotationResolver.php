@@ -26,7 +26,7 @@ class AnnotationResolver implements AnnotationResolverInterface {
    */
   public static function createGeneric() {
     return new self(
-      new PrimitiveResolver_Default(),
+      PrimitiveResolver_Default::create(),
       new ObjectResolver_GenericAnnotationClass());
   }
 
