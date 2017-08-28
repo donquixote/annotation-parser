@@ -2,15 +2,16 @@
 
 namespace Donquixote\Annotation\Resolver;
 
-use Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface;
+use Donquixote\Annotation\Ast\Object\Ast_ObjectInterface;
 
 interface AnnotationResolverInterface {
 
   /**
-   * @param \Donquixote\Annotation\RawAst\RawDoctrineAnnotationInterface $rawAnnotation
+   * @param \Donquixote\Annotation\Ast\Object\Ast_ObjectInterface $ast
+   * @param \Reflector $reflector
    *
-   * @return \Donquixote\Annotation\Value\DoctrineAnnotation\DoctrineAnnotationInterface
+   * @return mixed
    */
-  public function resolveAnnotation(RawDoctrineAnnotationInterface $rawAnnotation);
+  public function resolveAnnotation(Ast_ObjectInterface $ast, \Reflector $reflector);
 
 }

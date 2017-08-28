@@ -2,7 +2,8 @@
 
 namespace Donquixote\Annotation\Tests;
 
-use Donquixote\Annotation\Resolver\PrimitiveResolver_Default;
+use Donquixote\Annotation\Reflector\CustomReflector;
+use Donquixote\Annotation\Resolver\Primitive\PrimitiveResolver_Default;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassAliasConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_Fqcn;
@@ -11,6 +12,8 @@ use Donquixote\Annotation\Value\Identifier\Identifier_QcnOrAlias;
 class PrimitiveResolverTest extends \PHPUnit_Framework_TestCase {
 
   public function testResolvePrimitive() {
+
+    $reflector = new CustomReflector();
 
     $resolver = PrimitiveResolver_Default::create(
       [
@@ -45,7 +48,9 @@ class PrimitiveResolverTest extends \PHPUnit_Framework_TestCase {
 
     ] as $s => $expected) {
       $s = (string)$s;
-      self::assertSameExport($expected, $resolver->resolvePrimitive($s));
+      self::assertSameExport(
+        $expected,
+        $resolver->resolvePrimitive($s, $reflector));
     }
 
     // Numbers.
@@ -85,7 +90,9 @@ class PrimitiveResolverTest extends \PHPUnit_Framework_TestCase {
 
     ] as $s => $expected) {
       $s = substr($s, 1);
-      self::assertSameExport($expected, $resolver->resolvePrimitive($s));
+      self::assertSameExport(
+        $expected,
+        $resolver->resolvePrimitive($s, $reflector));
     }
   }
 
@@ -94,11 +101,12 @@ class PrimitiveResolverTest extends \PHPUnit_Framework_TestCase {
    *
    * @dataProvider providerResolvePrimitiveFail
    *
-   * @expectedException \Donquixote\Annotation\Resolver\ResolverException
+   * @expectedException \Donquixote\Annotation\Exception\ResolverException
    */
   public function testResolvePrimitiveFail($s) {
+    $reflector = new CustomReflector();
     $resolver = PrimitiveResolver_Default::create();
-    $resolver->resolvePrimitive($s);
+    $resolver->resolvePrimitive($s, $reflector);
   }
 
   /**

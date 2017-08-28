@@ -2,9 +2,9 @@
 
 namespace Donquixote\Annotation\Tests;
 
-use Donquixote\Annotation\DocCommentUtil;
-use Donquixote\Annotation\RawAst\RawDoctrineAnnotation;
-use Donquixote\Annotation\RawAst\RawPhpDocAnnotation;
+use Donquixote\Annotation\Ast\Object\Ast_Object;
+use Donquixote\Annotation\Ast\PhpDoc\Ast_PhpDoc;
+use Donquixote\Annotation\Util\DocCommentUtil;
 
 class DocCommentUtilTest extends \PHPUnit_Framework_TestCase {
 
@@ -91,11 +91,11 @@ Is unfair.
 ',
         [
           'It flows like a river.',
-          new RawDoctrineAnnotation('Foo', []),
-          new RawPhpDocAnnotation('param', 'float $length'),
-          new RawPhpDocAnnotation('param', 'string $name
+          new Ast_Object('Foo', []),
+          new Ast_PhpDoc('param', 'float $length'),
+          new Ast_PhpDoc('param', 'string $name
   The name.'),
-          new RawPhpDocAnnotation('return', 'float')
+          new Ast_PhpDoc('return', 'float')
         ]
       ],
     ];

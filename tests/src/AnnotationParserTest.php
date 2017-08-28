@@ -2,9 +2,9 @@
 
 namespace Donquixote\Annotation\Tests;
 
+use Donquixote\Annotation\Ast\Object\Ast_Object;
+use Donquixote\Annotation\Ast\PhpDoc\Ast_PhpDoc;
 use Donquixote\Annotation\Parser\AnnotationParser;
-use Donquixote\Annotation\RawAst\RawDoctrineAnnotation;
-use Donquixote\Annotation\RawAst\RawPhpDocAnnotation;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_QcnOrAlias;
 
@@ -17,14 +17,14 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
 
     foreach ([
 
-      '@Foo(x = "7", y = {})' => new RawDoctrineAnnotation('Foo', [
+      '@Foo(x = "7", y = {})' => new Ast_Object('Foo', [
         'x' => '"7"',
         'y' => [],
       ]),
 
-      '@Foo(x = "7", y = @Bar())' => new RawDoctrineAnnotation('Foo', [
+      '@Foo(x = "7", y = @Bar())' => new Ast_Object('Foo', [
         'x' => '"7"',
-        'y' => new RawDoctrineAnnotation('Bar', []),
+        'y' => new Ast_Object('Bar', []),
       ]),
 
       '@Foo(
@@ -33,9 +33,9 @@ class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
 "7"
   ,
   y = @Bar()
-)' => new RawDoctrineAnnotation('Foo', [
+)' => new Ast_Object('Foo', [
         'x' => '"7"',
-        'y' => new RawDoctrineAnnotation('Bar', []),
+        'y' => new Ast_Object('Bar', []),
       ]),
 
     ] as $text => $expected) {
@@ -280,18 +280,18 @@ function p($text) {
  * @param string $name
  * @param array $arguments
  *
- * @return \Donquixote\Annotation\RawAst\RawDoctrineAnnotation
+ * @return \Donquixote\Annotation\Ast\Object\Ast_Object
  */
 function rda($name, array $arguments) {
-  return new RawDoctrineAnnotation($name, $arguments);
+  return new Ast_Object($name, $arguments);
 }
 
 /**
  * @param string $name
  * @param string $text
  *
- * @return \Donquixote\Annotation\RawAst\RawPhpDocAnnotation
+ * @return \Donquixote\Annotation\Ast\PhpDoc\Ast_PhpDoc
  */
 function rdt($name, $text) {
-  return new RawPhpDocAnnotation($name, $text);
+  return new Ast_PhpDoc($name, $text);
 }

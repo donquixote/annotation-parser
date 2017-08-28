@@ -2,8 +2,8 @@
 
 namespace Donquixote\Annotation\Parser;
 
-use Donquixote\Annotation\DocCommentUtil;
-use Donquixote\Annotation\RawAst\RawDoctrineAnnotation;
+use Donquixote\Annotation\Ast\Object\Ast_Object;
+use Donquixote\Annotation\Util\DocCommentUtil;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassAliasConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_Fqcn;
@@ -44,7 +44,7 @@ class AnnotationParser {
   /**
    * @param int $i
    *
-   * @return \Donquixote\Annotation\RawAst\RawDoctrineAnnotation|false
+   * @return \Donquixote\Annotation\Ast\Object\Ast_Object|false
    */
   public function doctrineAnnotation(&$i) {
     $j = $i;
@@ -61,7 +61,7 @@ class AnnotationParser {
 
     $i = $j;
 
-    return new RawDoctrineAnnotation($name, $arguments);
+    return new Ast_Object($name, $arguments);
   }
 
   /**
