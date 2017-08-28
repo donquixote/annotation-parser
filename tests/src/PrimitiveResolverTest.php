@@ -9,7 +9,7 @@ use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_Fqcn;
 use Donquixote\Annotation\Value\Identifier\Identifier_QcnOrAlias;
 
-class PrimitiveResolverTest extends \PHPUnit_Framework_TestCase {
+class PrimitiveResolverTest extends TestBase {
 
   public function testResolvePrimitive() {
 

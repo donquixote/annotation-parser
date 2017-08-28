@@ -13,7 +13,7 @@ use Donquixote\Annotation\Resolver\Primitive\PrimitiveResolver_Default;
 use Donquixote\Annotation\Tests\Fixtures\Annotated\MyAnnotatedClass;
 use Donquixote\Annotation\Tests\Fixtures\Annotation\Hello;
 
-class AnnotationReaderTest extends \PHPUnit_Framework_TestCase {
+class AnnotationReaderTest extends TestBase {
 
   /**
    * @dataProvider providerReadAnnotations()

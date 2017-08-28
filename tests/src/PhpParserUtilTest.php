@@ -9,7 +9,7 @@ use Donquixote\Annotation\Reflector\CustomReflector;
 use Donquixote\Annotation\Resolver\AnnotationResolver;
 use Donquixote\Annotation\Util\DocCommentUtil;
 
-class PhpParserUtilTest extends \PHPUnit_Framework_TestCase {
+class PhpParserUtilTest extends TestBase {
 
   public function testFileGetImports() {
 

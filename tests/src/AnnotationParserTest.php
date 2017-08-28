@@ -8,7 +8,7 @@ use Donquixote\Annotation\Parser\AnnotationParser;
 use Donquixote\Annotation\Value\Identifier\Identifier_ClassConstant;
 use Donquixote\Annotation\Value\Identifier\Identifier_QcnOrAlias;
 
-class AnnotationParserTest extends \PHPUnit_Framework_TestCase {
+class AnnotationParserTest extends TestBase {
 
   //                                                                   Structure
   // ---------------------------------------------------------------------------

@@ -9,7 +9,7 @@ use Donquixote\Annotation\Resolver\AnnotationResolver;
 use Donquixote\Annotation\Value\GenericAnnotation\GenericAnnotation;
 use Donquixote\Annotation\Value\GenericAnnotation\GenericAnnotationInterface;
 
-class AnnotationResolver2Test extends \PHPUnit_Framework_TestCase {
+class AnnotationResolver2Test extends TestBase {
 
   /**
    * @param \Donquixote\Annotation\Ast\Object\Ast_ObjectInterface $raw

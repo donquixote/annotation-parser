@@ -6,7 +6,7 @@ use Donquixote\Annotation\Ast\Object\Ast_Object;
 use Donquixote\Annotation\Ast\PhpDoc\Ast_PhpDoc;
 use Donquixote\Annotation\Util\DocCommentUtil;
 
-class DocCommentUtilTest extends \PHPUnit_Framework_TestCase {
+class DocCommentUtilTest extends TestBase {
 
   public function testDocGetClean() {
 
