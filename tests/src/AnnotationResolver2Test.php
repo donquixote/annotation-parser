@@ -5,7 +5,7 @@ namespace Donquixote\Annotation\Tests;
 use Donquixote\Annotation\Ast\Object\Ast_Object;
 use Donquixote\Annotation\Ast\Object\Ast_ObjectInterface;
 use Donquixote\Annotation\Reflector\CustomReflector;
-use Donquixote\Annotation\Resolver\AnnotationResolver_PrimitiveResolver;
+use Donquixote\Annotation\Resolver\AnnotationResolver;
 use Donquixote\Annotation\Value\GenericAnnotation\GenericAnnotation;
 use Donquixote\Annotation\Value\GenericAnnotation\GenericAnnotationInterface;
 
@@ -22,7 +22,7 @@ class AnnotationResolver2Test extends \PHPUnit_Framework_TestCase {
     // The basic resolver does not care about the reflection class.
     $reflector = new CustomReflector();
 
-    $resolver = AnnotationResolver_PrimitiveResolver::create();
+    $resolver = AnnotationResolver::createGeneric();
     self::assertSameExport($expected, $resolver->resolveAnnotation($raw, $reflector));
   }
 
