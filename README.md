@@ -18,7 +18,7 @@ $docText = '
 ';
 $parser = new AnnotationParser($docText);
 if (false !== $position = strpos('@Foo', $docText)) {
-  $annotation = $parser->doctrineAnnotation($position);
+  $annotation = $parser->annotationObject($position);
 }
 ```
 

@@ -68,7 +68,7 @@ Is unfair.
    * @dataProvider providerTextGetRawPieces
    */
   public function testTextGetRawPieces($text, array $expected) {
-    self::assertSameExport($expected, DocCommentUtil::textGetRawPieces($text), $text);
+    self::assertSameExport($expected, DocCommentUtil::textGetAst($text), $text);
   }
 
   /**

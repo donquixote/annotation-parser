@@ -8,9 +8,9 @@ use Donquixote\Annotation\Ast\Object\Ast_Object;
 use Donquixote\Annotation\Ast\Object\Ast_ObjectInterface;
 use Donquixote\Annotation\Ast\PhpDoc\Ast_PhpDoc;
 use Donquixote\Annotation\Parser\AnnotationParser;
-
-# use Donquixote\Annotation\Resolver\AnnotationResolver_PrimitiveResolver;
-# use Donquixote\Annotation\Resolver\AnnotationResolverInterface;
+use Donquixote\Annotation\Reflector\CustomReflector;
+use Donquixote\Annotation\Resolver\AnnotationResolver;
+use Donquixote\Annotation\Resolver\AnnotationResolverInterface;
 
 class DocCommentUtil {
 
@@ -21,21 +21,21 @@ class DocCommentUtil {
    *
    * @return \Donquixote\Annotation\Value\GenericAnnotation\GenericAnnotationInterface[]
    */
-  /*
-  public static function docGetDoctrineAnnotations($docComment, $tagName = null, AnnotationResolverInterface $annotationResolver = null) {
+  public static function docGetGenericAnnotationObjects($docComment, $tagName = null, AnnotationResolverInterface $annotationResolver = null) {
 
     if (null === $annotationResolver) {
-      $annotationResolver = AnnotationResolver_PrimitiveResolver::create();
+      $annotationResolver = AnnotationResolver::createGeneric();
     }
 
+    $reflector = new CustomReflector();
+
     $annotations = [];
-    foreach (self::docGetRawDoctrineAnnotations($docComment, $tagName) as $rawAnnotation) {
-      $annotations[] = $annotationResolver->resolveAnnotation($rawAnnotation, $context);
+    foreach (self::docGetRawAnnotationObjects($docComment, $tagName) as $rawAnnotation) {
+      $annotations[] = $annotationResolver->resolveAnnotation($rawAnnotation, $reflector);
     }
 
     return $annotations;
   }
-  */
 
   /**
    * @param string $docComment
@@ -43,10 +43,10 @@ class DocCommentUtil {
    *
    * @return \Donquixote\Annotation\Ast\Object\Ast_ObjectInterface[]
    */
-  public static function docGetRawDoctrineAnnotations($docComment, $tagName = null) {
+  public static function docGetRawAnnotationObjects($docComment, $tagName = null) {
 
     $annotations = [];
-    foreach (self::docGetRawPieces($docComment) as $piece) {
+    foreach (self::docGetAst($docComment) as $piece) {
       if ($piece instanceof Ast_ObjectInterface) {
         if (null === $tagName || $tagName === $piece->getName()) {
           $annotations[] = $piece;
@@ -63,10 +63,10 @@ class DocCommentUtil {
    *
    * @return \Donquixote\Annotation\Ast\PhpDoc\Ast_PhpDoc[]
    */
-  public static function docGetRawTags($docComment, $tagName = null) {
+  public static function docGetAstForPhpDoc($docComment, $tagName = null) {
 
     $tags = [];
-    foreach (self::docGetRawPieces($docComment) as $piece) {
+    foreach (self::docGetAst($docComment) as $piece) {
       if ($piece instanceof Ast_PhpDoc) {
         if (null === $tagName || $tagName === $piece->getName()) {
           $tags[] = $piece;
@@ -82,9 +82,9 @@ class DocCommentUtil {
    *
    * @return mixed[]
    */
-  public static function docGetRawPieces($docComment) {
+  public static function docGetAst($docComment) {
     $cleanComment = self::docGetClean($docComment);
-    return self::textGetRawPieces($cleanComment);
+    return self::textGetAst($cleanComment);
   }
 
   /**
@@ -126,7 +126,7 @@ class DocCommentUtil {
    *
    * @return mixed[]
    */
-  public static function textGetRawPieces($cleanComment) {
+  public static function textGetAst($cleanComment) {
 
     if ('' === $cleanComment) {
       return [];
@@ -150,7 +150,7 @@ class DocCommentUtil {
       $text = $splitComment[$i];
 
       if ('(' === $text[0]) {
-        if (false === $arguments = self::parseDoctrineAnnotationBody($text)) {
+        if (false === $arguments = self::parseAnnotationObjectBody($text)) {
           $result[] = new Ast_BrokenObject($name, $text);
         }
         else {
@@ -175,7 +175,7 @@ class DocCommentUtil {
    *
    * @return mixed[]|false
    */
-  public static function parseDoctrineAnnotationBody($snippet) {
+  public static function parseAnnotationObjectBody($snippet) {
     $pos = 0;
     $parser = new AnnotationParser($snippet);
     return $parser->body($pos);

@@ -46,7 +46,7 @@ class AnnotationParser {
    *
    * @return \Donquixote\Annotation\Ast\Object\Ast_Object|false
    */
-  public function doctrineAnnotation(&$i) {
+  public function annotationObject(&$i) {
     $j = $i;
 
     if (false === $name = $this->regex($j, '~\G@([a-zA-Z_][a-zA-Z0-9_]*)~', 1)) {
@@ -201,7 +201,7 @@ class AnnotationParser {
     }
 
     if ('@' === $c) {
-      if (false !== $v = $this->doctrineAnnotation($i)) {
+      if (false !== $v = $this->annotationObject($i)) {
         return $v;
       }
     }

@@ -24,7 +24,7 @@ interface Ast_ObjectInterface {
    * Entries without an array key automatically get numeric keys.
    *
    * Each array value is one of:
-   * - A RawDoctrineAnnotationInterface object,
+   * - An Ast_ObjectInterface object,
    *   for values like "@Translate("some text")".
    * - A string, containing the exact trimmed entry as-is.
    *   This is for constants, string literals, and numbers.
@@ -35,7 +35,7 @@ interface Ast_ObjectInterface {
    *   E.g.:
    *   [
    *     0 => '"hello"',
-   *     'label' => new RawDoctrineAnnotation("t", [0 => "Hello"]),
+   *     'label' => new Ast_Object("t", [0 => "Hello"]),
    *     'active' => 'true',
    *   ].
    */

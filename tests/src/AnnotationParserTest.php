@@ -13,7 +13,7 @@ class AnnotationParserTest extends TestBase {
   //                                                                   Structure
   // ---------------------------------------------------------------------------
 
-  public function testDoctrineAnnotation() {
+  public function testAnnotationObject() {
 
     foreach ([
 
@@ -40,7 +40,7 @@ class AnnotationParserTest extends TestBase {
 
     ] as $text => $expected) {
       $i = 0;
-      self::assertSameExport($expected, p($text)->doctrineAnnotation($i), $text);
+      self::assertSameExport($expected, p($text)->annotationObject($i), $text);
       self::assertSame(strlen($text), $i, $text);
     }
 
@@ -50,7 +50,7 @@ class AnnotationParserTest extends TestBase {
       '@Foo(@Bar(',
     ] as $text) {
       $i = 0;
-      self::assertFalse(p($text)->doctrineAnnotation($i), $text);
+      self::assertFalse(p($text)->annotationObject($i), $text);
       self::assertSame(0, $i, $text);
     }
   }

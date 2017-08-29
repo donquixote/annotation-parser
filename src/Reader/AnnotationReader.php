@@ -36,7 +36,7 @@ class AnnotationReader {
     }
 
     // @todo Make the parser injectable?
-    $astNodes = DocCommentUtil::docGetRawPieces($docComment);
+    $astNodes = DocCommentUtil::docGetAst($docComment);
 
     $annotations = [];
     foreach ($astNodes as $astNode) {
